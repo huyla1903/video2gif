@@ -1,29 +1,37 @@
 #!/usr/bin/env python3
-"""Convert .mov/.mp4 files to GIF at full resolution, optionally under a size limit.
+"""
+@title        video2gif
+@version      0.1.0
+@author       La Gia Huy
+@since        2026-10-05
+@updated      2026-10-05
+@engine       Python 3
+@target       Windows; ffmpeg
+@about        Convert .mov/.mp4 files to GIF at full resolution, optionally under a size limit.
 
-Without --max-kb: output matches the source (declared resolution, source fps,
-256 colors, no denoise).
+              Without --max-kb: output matches the source (declared resolution, source fps,
+              256 colors, no denoise).
 
-With --max-kb, priority order (see CLAUDE.md):
-    1. resolution  - always kept at the source's declared size
-    2. file size   - must be <= --max-kb
-    3. colors      - palette size, then dithering
-    4. frame rate  - lowered first
+              With --max-kb, priority order (see CLAUDE.md):
+                  1. resolution  - always kept at the source's declared size
+                  2. file size   - must be <= --max-kb
+                  3. colors      - palette size, then dithering
+                  4. frame rate  - lowered first
 
-Frame rates are tried as source_fps / n (e.g. 25, 12.5, 8.33, 6.25 ...) so
-frames stay evenly spaced and GIF delays land on whole centiseconds.
+              Frame rates are tried as source_fps / n (e.g. 25, 12.5, 8.33, 6.25 ...) so
+              frames stay evenly spaced and GIF delays land on whole centiseconds.
 
-Edge fix: some exports declare e.g. 375x375 but only decode 374 real columns;
-forcing the declared size fabricates a garbage edge pixel. We detect the real
-decodable size, crop to it, and smear the last good column/row back out to
-the declared size.
+              Edge fix: some exports declare e.g. 375x375 but only decode 374 real columns;
+              forcing the declared size fabricates a garbage edge pixel. We detect the real
+              decodable size, crop to it, and smear the last good column/row back out to
+              the declared size.
 
-Usage:
-    python video2gif.py file1.mov file2.mp4 ...
-    python video2gif.py --max-kb 1000 file.mov
-    python video2gif.py --max-kb 1000 --start 2 --duration 5 file.mov
+              Usage:
+                  python video2gif.py file1.mov file2.mp4 ...
+                  python video2gif.py --max-kb 1000 file.mov
+                  python video2gif.py --max-kb 1000 --start 2 --duration 5 file.mov
 
-Requires ffmpeg/ffprobe on PATH or in C:\\ffmpeg\\bin.
+              Requires ffmpeg/ffprobe on PATH or in C:\\ffmpeg\\bin.
 """
 import argparse
 import os

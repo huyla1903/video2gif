@@ -1,3 +1,12 @@
+@rem @title        video2gif (launcher)
+@rem @version      0.1.0
+@rem @author       La Gia Huy
+@rem @since        2026-10-05
+@rem @updated      2026-10-05
+@rem @engine       Windows batch (cmd.exe)
+@rem @target       Windows; Python 3, ffmpeg
+@rem @about        Drop .mov/.mp4 files on it: asks for a size limit, then runs video2gif.py.
+@rem
 @echo off
 setlocal
 
